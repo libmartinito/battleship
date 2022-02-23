@@ -1,4 +1,4 @@
-import { Ship, Gameboard, Player } from "./index"
+import { Ship, Gameboard, Player } from "./app"
 
 const ship = Ship(1)
 

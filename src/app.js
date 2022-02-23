@@ -25,7 +25,7 @@ const Ship = (shipLength, shipName) => {
   return{ shipLength, shipName, hit, isSunk }
 }
 
-const Gameboard = () => {
+const Gameboard = (boardStart, boardEnd) => {
   const ships = []
   const shipCoordinates = {}
   const receivedAttackCoordinates = []
@@ -111,7 +111,7 @@ const Gameboard = () => {
     return allShipsSunkBool
   }
 
-  return { placeShip, shipCoordinates, receiveAttack, ships, receivedAttackCoordinates, areAllShipsSunk }
+  return { placeShip, shipCoordinates, receiveAttack, ships, receivedAttackCoordinates, areAllShipsSunk, boardStart, boardEnd }
 }
 
 const Player = () => {
