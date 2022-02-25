@@ -122,11 +122,11 @@ const Player = () => {
     attackedCoordinates.push(coordinates)
   }
 
-  const generateRandomLetter = (max) => String.fromCharCode(Math.random()*max+97)
   const generateRandomNumber = (min, max) => Math.floor(Math.random()*(max - min + 1) - min)
+  const generateRandomLetter = (min, max) => String.fromCharCode(generateRandomNumber(min, max)+97)
 
   const generateCoordinates = () => {
-    const letter = generateRandomLetter(10)
+    const letter = generateRandomLetter(1,10)
     const number = generateRandomNumber(1,10)
     const coordinate = letter.toUpperCase() + number.toString()
     return coordinate
@@ -142,6 +142,10 @@ const Player = () => {
   }
 
   return { attack, randomAttack }
+}
+
+const Game = () => {
+
 }
 
 export { Ship, Gameboard, Player }

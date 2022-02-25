@@ -24,18 +24,29 @@
   grid-template-rows: repeat(11, 1fr);
 }
 
-.player__col-header {
+.computer {
+  grid-column: 7/11;
+  grid-row: 3/9;
+  display: grid;
+  grid-template-columns: repeat(11, 1fr);
+  grid-template-rows: repeat(11, 1fr);
+}
+
+.player__col-header,
+.computer__col-header {
   grid-column: 2/12;
   grid-row: 1/2;
   display: flex;
 }
 
-.player__row-header {
+.player__row-header,
+.computer__row-header {
   grid-column: 1/2;
   grid-row: 2/12;
 }
 
-.player__grid {
+.player__grid,
+.computer__grid {
   grid-column: 2/12;
   grid-row: 2/12;
   display: flex;
