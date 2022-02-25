@@ -15,10 +15,15 @@ const populateHeader = (parent, orientation) => {
 }
 
 const populateGrid = (parent) => {
-  for(let i = 0; i < 100; i += 1) {
-    const box = document.createElement("div");
-    box.classList.add("box");
-    parent.appendChild(box);
+  for(let i = 0; i < 10; i += 1) {
+    for(let j = 0; j < 10; j += 1) {
+      const box = document.createElement("div");
+      box.classList.add("box");
+      const xCoor = String.fromCharCode(97 + j).toUpperCase();
+      const yCoor = (i + 1).toString();
+      box.dataset.coordinate = xCoor + yCoor;
+      parent.appendChild(box);
+    }
   }
 }
 
