@@ -37,30 +37,33 @@ describe('placeShip', () => {
     expect(arr).toEqual(expected)
   });
 });
-/*
+
 describe('receiveAttack', () => {
   it('sinks a ship when attacks are received for all coordinates of the ship', () => {
     const gameboard = Gameboard()
     gameboard.placeShip('A1', 'A3')
     gameboard.receiveAttack('A1')
     gameboard.receiveAttack('A2')
-    expect(gameboard.ships[0].isSunk()).toBeTruthy
+    const ships = gameboard.getShips()
+    expect(ships[0].isSunk()).toBeTruthy
   })
   it('does not sink a ship when attacks are not received for all coordinates of a ship', () => {
     const gameboard = Gameboard()
     gameboard.placeShip('A1', 'A3')
     gameboard.receiveAttack('A1')
-    expect(gameboard.ships[0].isSunk()).toBeFalsy
+    const ships = gameboard.getShips()
+    expect(ships[0].isSunk()).toBeFalsy
   })
   it('adds the coordinate attacked that did not hit a ship to an array', () => {
     const gameboard = Gameboard()
     gameboard.placeShip('A1', 'A3')
     gameboard.receiveAttack('A4')
+    const missedAttacksArr = gameboard.getMissedAttacksArr()
     const expected = ['A4']
-    expect(gameboard.receivedAttackCoordinates).toEqual(expected)
+    expect(missedAttacksArr).toEqual(expected)
   })
 })
-
+/*
 describe('areAllShipsSunk', () => {
   it('returns true if all ships are sunk', () => {
     const gameboard = Gameboard()

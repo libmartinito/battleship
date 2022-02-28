@@ -34,11 +34,11 @@ const Ship = (shipLength, shipName) => {
 
 const Gameboard = () => {
   const ships = []
-  const shipCoordinatesArr = {}
+  const shipCoordinatesObj = {}
   const missedAttacksArr = []
   let shipCounter = 1
 
-  const getShipCoordinatesArr = () => shipCoordinatesArr
+  const getShipCoordinatesArr = () => shipCoordinatesObj
 
   // A function that adds ship coordinates to an array and makes a ship object
   const placeShip = (start, end) => {
@@ -59,13 +59,13 @@ const Gameboard = () => {
       for(let i = 0; i < yLength + 1; i += 1) {
         coordinatesArr.push((startX + 9).toString(36).toUpperCase() + (startY + i).toString())
       }
-      shipCoordinatesArr[shipName] = coordinatesArr
+      shipCoordinatesObj[shipName] = coordinatesArr
     } else {
       shipLength = xLength
       for(let i = 0; i < xLength + 1; i += 1) {
         coordinatesArr.push((startX + i + 9).toString(36).toUpperCase() + (startY).toString())
       }
-      shipCoordinatesArr[shipName] = coordinatesArr
+      shipCoordinatesObj[shipName] = coordinatesArr
     }
     
     const ship = Ship(shipLength, shipName)
@@ -73,15 +73,35 @@ const Gameboard = () => {
     shipCounter += 1
   }
 
+  // A helper function that returns the key given a value
+  const getKeyByValue = (obj, value) => Object.keys(obj).find(key => obj[key].includes(value))
+
+  // A helper function that calls a hit function on a ship given the ship name
+  const hitShip = (shipName) => {
+    ships.forEach(ship => {
+      if(ship.shipName === shipName) {
+        ship.hit()
+      }
+    })
+  }
+
   // A function that determines if a ship has been hit, sends the hit function
   // to said ship and collects missed attacks in an array
   const receiveAttack = (coordinates) => {
+    const shipCoordinatesObjValues = Object.values(shipCoordinatesObj)
+    const shipCoordinatesArr = [].concat(...shipCoordinatesObjValues)
     if(shipCoordinatesArr.includes(coordinates)) {
-
+      const shipAttacked = getKeyByValue(coordinates)
+      hitShip(shipAttacked)
+    } else {
+      missedAttacksArr.push(coordinates)
     }
   }
 
-  return { placeShip, getShipCoordinatesArr }
+  const getShips = () => ships
+  const getMissedAttacksArr = () => missedAttacksArr
+
+  return { placeShip, getShipCoordinatesArr, receiveAttack, getShips, getMissedAttacksArr }
 }
 
 export { Ship, Gameboard }
