@@ -29,8 +29,6 @@ const displayGrid = (parent) => {
 
 const displayShips = (coordinateObj) => {
   const shipCoordinatesObjVal = Object.values(coordinateObj)
-  console.log(shipCoordinatesObjVal)
-  const shipCoordinatesArr = [].concat(...shipCoordinatesObjVal)
   const boxArr = document.querySelectorAll('.box')
   boxArr.forEach(box => {
     for(let i = 0; i < shipCoordinatesObjVal.length; i += 1) {
@@ -53,5 +51,15 @@ const displayShips = (coordinateObj) => {
   })
 }
 
-export{ displayHeader, displayGrid, displayShips }
+const addBoxEventListener = (player) => {
+  const boxArr = document.querySelectorAll('.computer__grid .box')
+  boxArr.forEach(box => {
+    box.addEventListener('click', (e) => {
+      e.target.textContent = 'X'
+      player.attack(e.target.dataset.coordinate)
+    })
+  })
+}
+
+export{ displayHeader, displayGrid, displayShips, addBoxEventListener }
 

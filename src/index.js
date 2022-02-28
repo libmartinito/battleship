@@ -1,5 +1,5 @@
 
-import { displayHeader, displayGrid, displayShips } from './dom';
+import { displayHeader, displayGrid, displayShips, addBoxEventListener } from './dom';
 import './styles.css';
 import { Gameboard, Player } from './app'
 
@@ -38,6 +38,7 @@ const Game = () => {
 
   const shipCoordinatesArr = playerBoard.getShipCoordinatesObj()
   displayShips(shipCoordinatesArr)
+  addBoxEventListener(player)
 }
 
 Game()

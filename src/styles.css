@@ -80,4 +80,8 @@
   border: 1px solid var(--neutral);
   width: 10%;
   height: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
 }
