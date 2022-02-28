@@ -1,4 +1,4 @@
-const populateHeader = (parent, orientation) => {
+const displayHeader = (parent, orientation) => {
 
   for(let i = 0; i < 10; i += 1) {
     const box = document.createElement("div");
@@ -14,7 +14,7 @@ const populateHeader = (parent, orientation) => {
   }
 }
 
-const populateGrid = (parent) => {
+const displayGrid = (parent) => {
   for(let i = 0; i < 10; i += 1) {
     for(let j = 0; j < 10; j += 1) {
       const box = document.createElement("div");
@@ -27,5 +27,19 @@ const populateGrid = (parent) => {
   }
 }
 
-export{ populateHeader, populateGrid }
+const displayShips = (shipCoordinatesObj) => {
+  const shipCoordinatesArr = Object.values(shipCoordinatesObj)
+  console.log(shipCoordinatesArr)
+  const boxArr = document.querySelectorAll('.box')
+  console.log(boxArr)
+  boxArr.forEach(box => {
+    for(let i = 0; i < shipCoordinatesArr.length; i += 1) {
+      if(box.dataset.coordinate === shipCoordinatesArr[i]) {
+        box.style.backgroundColor = 'blue'
+      }
+    }
+  })
+}
+
+export{ displayHeader, displayGrid, displayShips }
 

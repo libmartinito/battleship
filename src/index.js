@@ -1,6 +1,7 @@
 
-import { populateHeader, populateGrid } from './dom.js';
+import { displayHeader, displayGrid } from './dom';
 import './styles.css';
+import { Game } from './app'
 
 const playerColHeader = document.querySelector('.player__col-header');
 const playerRowHeader = document.querySelector('.player__row-header');
@@ -10,10 +11,12 @@ const compColHeader = document.querySelector('.computer__col-header');
 const compRowHeader = document.querySelector('.computer__row-header');
 const compGrid = document.querySelector('.computer__grid');
 
-populateHeader(playerColHeader, 'col');
-populateHeader(playerRowHeader, 'row');
-populateGrid(playerGrid);
+displayHeader(playerColHeader, 'col');
+displayHeader(playerRowHeader, 'row');
+displayGrid(playerGrid);
 
-populateHeader(compColHeader, 'col');
-populateHeader(compRowHeader, 'row');
-populateGrid(compGrid);
+displayHeader(compColHeader, 'col');
+displayHeader(compRowHeader, 'row');
+displayGrid(compGrid);
+
+Game()
