@@ -1,7 +1,7 @@
 
 import { displayHeader, displayGrid } from './dom';
 import './styles.css';
-import { Game } from './app'
+import { Gameboard, Player } from './app'
 
 const playerColHeader = document.querySelector('.player__col-header');
 const playerRowHeader = document.querySelector('.player__row-header');
@@ -19,4 +19,21 @@ displayHeader(compColHeader, 'col');
 displayHeader(compRowHeader, 'row');
 displayGrid(compGrid);
 
-Game()
+const Game = () => {
+  playerBoard = Gameboard()
+  compBoard = Gameboard()
+  player = Player()
+  comp = Player()
+
+  playerBoard.placeShip('A1', 'E1')
+  playerBoard.placeShip('A3', 'D3')
+  playerBoard.placeShip('F3', 'I3')
+  playerBoard.placeShip('A5', 'C5')
+  playerBoard.placeShip('E5', 'G5')
+  playerBoard.placeShip('A6', 'C6')
+  playerBoard.placeShip('A8', 'B8')
+  playerBoard.placeShip('D8', 'E8')
+  playerBoard.placeShip('G8', 'H8')
+  playerBoard.placeShip('A9', 'B9')
+
+}

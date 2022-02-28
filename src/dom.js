@@ -1,3 +1,5 @@
+import { getShipCoordinatesArr } from './app'
+
 const displayHeader = (parent, orientation) => {
 
   for(let i = 0; i < 10; i += 1) {
@@ -27,19 +29,9 @@ const displayGrid = (parent) => {
   }
 }
 
-const displayShips = (shipCoordinatesObj) => {
-  const shipCoordinatesArr = Object.values(shipCoordinatesObj)
-  console.log(shipCoordinatesArr)
-  const boxArr = document.querySelectorAll('.box')
-  console.log(boxArr)
-  boxArr.forEach(box => {
-    for(let i = 0; i < shipCoordinatesArr.length; i += 1) {
-      if(box.dataset.coordinate === shipCoordinatesArr[i]) {
-        box.style.backgroundColor = 'blue'
-      }
-    }
-  })
+const displayShips = () => {
+
 }
 
-export{ displayHeader, displayGrid, displayShips }
+export{ displayHeader, displayGrid }
 

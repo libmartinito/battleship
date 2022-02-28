@@ -38,7 +38,13 @@ const Gameboard = () => {
   const missedAttacksArr = []
   let shipCounter = 1
 
-  const getShipCoordinatesArr = () => shipCoordinatesObj
+  const getShipCoordinatesObj = () => shipCoordinatesObj
+
+  const getShipCoordinatesArr = () => {
+    const shipCoordinatesObjValues = Object.values(shipCoordinatesObj)
+    const shipCoordinatesArr = [].concat(...shipCoordinatesObjValues)
+    return shipCoordinatesArr
+  }
 
   // A function that adds ship coordinates to an array and makes a ship object
 
@@ -89,8 +95,7 @@ const Gameboard = () => {
   // A function that determines if a ship has been hit, sends the hit function
   // to said ship and collects missed attacks in an array
   const receiveAttack = (coordinates) => {
-    const shipCoordinatesObjValues = Object.values(shipCoordinatesObj)
-    const shipCoordinatesArr = [].concat(...shipCoordinatesObjValues)
+    const shipCoordinatesArr = getShipCoordinatesArr()
     if(shipCoordinatesArr.includes(coordinates)) {
       const shipAttacked = getKeyByValue(coordinates)
       hitShip(shipAttacked)
@@ -114,7 +119,7 @@ const Gameboard = () => {
     return allShipsSunkBool
   }
 
-  return { placeShip, getShipCoordinatesArr, receiveAttack, getShips, getMissedAttacksArr, areAllShipsSunk }
+  return { placeShip, getShipCoordinatesObj, getShipCoordinatesArr, receiveAttack, getShips, getMissedAttacksArr, areAllShipsSunk }
 }
 
 // A factory function for the player object
