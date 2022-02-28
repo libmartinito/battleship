@@ -63,7 +63,7 @@ describe('receiveAttack', () => {
     expect(missedAttacksArr).toEqual(expected)
   })
 })
-/*
+
 describe('areAllShipsSunk', () => {
   it('returns true if all ships are sunk', () => {
     const gameboard = Gameboard()
@@ -84,7 +84,7 @@ describe('areAllShipsSunk', () => {
     expect(gameboard.areAllShipsSunk()).toBeFalsy
   })
 })
-
+/*
 describe('fillboard', () => {
   it('fills a board with ships randomly', () => {
     const gameboard = Gameboard()

@@ -101,7 +101,19 @@ const Gameboard = () => {
   const getShips = () => ships
   const getMissedAttacksArr = () => missedAttacksArr
 
-  return { placeShip, getShipCoordinatesArr, receiveAttack, getShips, getMissedAttacksArr }
+  // A function that checks if all ships have been sunk
+
+  const areAllShipsSunk = () => {
+    let allShipsSunkBool = true
+    for(let i = 0; i < ships.length; i += 1) {
+      if(ships[i].isSunk() === false) {
+        allShipsSunkBool = false
+      }
+    }
+    return allShipsSunkBool
+  }
+
+  return { placeShip, getShipCoordinatesArr, receiveAttack, getShips, getMissedAttacksArr, areAllShipsSunk }
 }
 
 export { Ship, Gameboard }
