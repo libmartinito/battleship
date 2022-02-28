@@ -1,5 +1,5 @@
 
-import { displayHeader, displayGrid } from './dom';
+import { displayHeader, displayGrid, displayShips } from './dom';
 import './styles.css';
 import { Gameboard, Player } from './app'
 
@@ -20,10 +20,10 @@ displayHeader(compRowHeader, 'row');
 displayGrid(compGrid);
 
 const Game = () => {
-  playerBoard = Gameboard()
-  compBoard = Gameboard()
-  player = Player()
-  comp = Player()
+  const playerBoard = Gameboard()
+  const compBoard = Gameboard()
+  const player = Player()
+  const comp = Player()
 
   playerBoard.placeShip('A1', 'E1')
   playerBoard.placeShip('A3', 'D3')
@@ -36,4 +36,8 @@ const Game = () => {
   playerBoard.placeShip('G8', 'H8')
   playerBoard.placeShip('A9', 'B9')
 
+  const shipCoordinatesArr = playerBoard.getShipCoordinatesArr()
+  displayShips(shipCoordinatesArr)
 }
+
+Game()
