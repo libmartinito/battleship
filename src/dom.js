@@ -1,3 +1,5 @@
+import { Game } from './app'
+
 const displayHeader = (parent, orientation) => {
 
   for(let i = 0; i < 10; i += 1) {
@@ -29,7 +31,7 @@ const displayGrid = (parent) => {
 
 const displayShips = (coordinateObj) => {
   const shipCoordinatesObjVal = Object.values(coordinateObj)
-  const boxArr = document.querySelectorAll('.box')
+  const boxArr = document.querySelectorAll('.player__grid .box')
   boxArr.forEach(box => {
     for(let i = 0; i < shipCoordinatesObjVal.length; i += 1) {
       for(let j = 0; j < shipCoordinatesObjVal[i].length; j += 1) {
@@ -51,15 +53,5 @@ const displayShips = (coordinateObj) => {
   })
 }
 
-const addBoxEventListener = (player) => {
-  const boxArr = document.querySelectorAll('.computer__grid .box')
-  boxArr.forEach(box => {
-    box.addEventListener('click', (e) => {
-      e.target.textContent = 'X'
-      player.attack(e.target.dataset.coordinate)
-    })
-  })
-}
-
-export{ displayHeader, displayGrid, displayShips, addBoxEventListener }
+export{ displayHeader, displayGrid, displayShips }
 

@@ -1,3 +1,4 @@
+
 // A factory function for the ship object
 
 const Ship = (shipLength, shipName) => {
@@ -62,13 +63,13 @@ const Gameboard = () => {
     const coordinatesArr = []
 
     if(xLength === 0) {
-      shipLength = yLength
+      shipLength = yLength + 1
       for(let i = 0; i < yLength + 1; i += 1) {
         coordinatesArr.push((startX + 9).toString(36).toUpperCase() + (startY + i).toString())
       }
       shipCoordinatesObj[shipName] = coordinatesArr
     } else {
-      shipLength = xLength
+      shipLength = xLength + 1
       for(let i = 0; i < xLength + 1; i += 1) {
         coordinatesArr.push((startX + i + 9).toString(36).toUpperCase() + (startY).toString())
       }
@@ -84,10 +85,10 @@ const Gameboard = () => {
   const getKeyByValue = (obj, value) => Object.keys(obj).find(key => obj[key].includes(value))
 
   // A helper function that calls a hit function on a ship given the ship name
-  const hitShip = (shipName) => {
+  const hitShip = (shipName, index) => {
     ships.forEach(ship => {
       if(ship.shipName === shipName) {
-        ship.hit()
+        ship.hit(index)
       }
     })
   }
@@ -97,8 +98,9 @@ const Gameboard = () => {
   const receiveAttack = (coordinates) => {
     const shipCoordinatesArr = getShipCoordinatesArr()
     if(shipCoordinatesArr.includes(coordinates)) {
-      const shipAttacked = getKeyByValue(coordinates)
-      hitShip(shipAttacked)
+      const shipAttacked = getKeyByValue(shipCoordinatesObj, coordinates)
+      const index = shipCoordinatesObj[shipAttacked].indexOf(coordinates)
+      hitShip(shipAttacked, index)
     } else {
       missedAttacksArr.push(coordinates)
     }

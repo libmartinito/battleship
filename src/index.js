@@ -1,5 +1,5 @@
 
-import { displayHeader, displayGrid, displayShips, addBoxEventListener } from './dom';
+import { displayHeader, displayGrid, displayShips } from './dom';
 import './styles.css';
 import { Gameboard, Player } from './app'
 
@@ -36,9 +36,34 @@ const Game = () => {
   playerBoard.placeShip('G8', 'H8')
   playerBoard.placeShip('A9', 'B9')
 
+  compBoard.placeShip('A1', 'E1')
+
   const shipCoordinatesArr = playerBoard.getShipCoordinatesObj()
   displayShips(shipCoordinatesArr)
-  addBoxEventListener(player)
+
+  const checkWinner = () => {
+    const ships = compBoard.getShips()
+    if(playerBoard.areAllShipsSunk()) {
+      console.log(playerBoard.areAllShipsSunk())
+      console.log('The computer won.')
+    } else if(compBoard.areAllShipsSunk()) {
+      console.log(compBoard.areAllShipsSunk())
+      console.log('You won!')
+    }
+  }
+
+  const addBoxEventListener = () => {
+    const boxArr = document.querySelectorAll('.computer__grid .box')
+    boxArr.forEach(box => {
+      box.addEventListener('click', (e) => {
+        e.target.textContent = 'X'
+        player.attack(compBoard, e.target.dataset.coordinate)
+        checkWinner()
+      })
+    })
+  }
+
+  addBoxEventListener()
 }
 
 Game()

@@ -41,11 +41,12 @@ describe('placeShip', () => {
 describe('receiveAttack', () => {
   it('sinks a ship when attacks are received for all coordinates of the ship', () => {
     const gameboard = Gameboard()
-    gameboard.placeShip('A1', 'A3')
+    gameboard.placeShip('A1', 'A2')
     gameboard.receiveAttack('A1')
     gameboard.receiveAttack('A2')
     const ships = gameboard.getShips()
-    expect(ships[0].isSunk()).toBeTruthy
+    const expected = ['hit', 'hit']
+    expect(ships[0].getShipHitArr()).toEqual(expected)
   })
   it('does not sink a ship when attacks are not received for all coordinates of a ship', () => {
     const gameboard = Gameboard()
