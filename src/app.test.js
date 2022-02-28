@@ -26,14 +26,14 @@ describe('placeShip', () => {
     const gameboard = Gameboard()
     gameboard.placeShip('A1', 'A3')
     const arr = gameboard.getShipCoordinatesArr()
-    const expected = ['A1', 'A2', 'A3']
+    const expected = {'Ship1': ['A1', 'A2', 'A3']}
     expect(arr).toEqual(expected)
   });
   it('returns a ship object given coordinates in horizontal orientation', () => {
     const gameboard = Gameboard()
     gameboard.placeShip('A1', 'C1')
     const arr = gameboard.getShipCoordinatesArr()
-    const expected = ['A1', 'B1', 'C1']
+    const expected = {'Ship1': ['A1', 'B1', 'C1']}
     expect(arr).toEqual(expected)
   });
 });
