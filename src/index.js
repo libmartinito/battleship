@@ -36,7 +36,7 @@ const Game = () => {
   playerBoard.placeShip('G8', 'H8')
   playerBoard.placeShip('A9', 'B9')
 
-  const shipCoordinatesArr = playerBoard.getShipCoordinatesArr()
+  const shipCoordinatesArr = playerBoard.getShipCoordinatesObj()
   displayShips(shipCoordinatesArr)
 }
 

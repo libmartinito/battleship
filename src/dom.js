@@ -27,21 +27,31 @@ const displayGrid = (parent) => {
   }
 }
 
-const displayShips = (coordinateArr) => {
-  const shipCoordinatesArr = coordinateArr
-  console.log(shipCoordinatesArr)
+const displayShips = (coordinateObj) => {
+  const shipCoordinatesObjVal = Object.values(coordinateObj)
+  console.log(shipCoordinatesObjVal)
+  const shipCoordinatesArr = [].concat(...shipCoordinatesObjVal)
   const boxArr = document.querySelectorAll('.box')
-  console.log(boxArr)
   boxArr.forEach(box => {
-    for(let i = 0; i < shipCoordinatesArr.length; i += 1) {
-      if(box.dataset.coordinate === shipCoordinatesArr[i]) {
-        box.style.backgroundColor = 'blue'
+    for(let i = 0; i < shipCoordinatesObjVal.length; i += 1) {
+      for(let j = 0; j < shipCoordinatesObjVal[i].length; j += 1) {
+        if(box.dataset.coordinate === shipCoordinatesObjVal[i][j]) {
+          box.style.backgroundColor = 'var(--sky)'
+          if(j === 0) {
+            box.style.borderWidth = '2px 1px 2px 2px'
+            box.style.borderStyle = 'solid dotted solid solid'
+          } else if(j === shipCoordinatesObjVal[i].length - 1) {
+            box.style.borderWidth = '2px 2px 2px 1px'
+            box.style.borderStyle = 'solid solid solid dotted'
+          } else {
+            box.style.borderWidth = '2px 1px 2px 1px'
+            box.style.borderStyle = 'solid dotted'
+          }
+        }
       }
     }
   })
 }
-
-const add
 
 export{ displayHeader, displayGrid, displayShips }
 

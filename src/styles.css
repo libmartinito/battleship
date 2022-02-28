@@ -5,6 +5,8 @@
 }
 
 :root {
+  --neutral: #525252;
+  --sky: #e0f2fe;
   box-sizing: border-box;
   font: 14px;
 }
@@ -51,6 +53,7 @@
   grid-row: 2/12;
   display: flex;
   flex-wrap: wrap;
+  border: 1px solid var(--neutral);
 }
 
 .computer {
@@ -74,7 +77,7 @@
 }
 
 .box {
-  border: 1px solid black;
+  border: 1px solid var(--neutral);
   width: 10%;
   height: 10%;
 }
