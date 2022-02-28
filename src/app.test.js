@@ -1,4 +1,4 @@
-import { Ship } from "./app"
+import { Ship, Gameboard } from "./app"
 
 describe('hit', () => {
   const ship = Ship(1)
@@ -21,24 +21,23 @@ describe('isSunk', () => {
   })
 })
 
-/*
 describe('placeShip', () => {
   it('returns a ship object given coordinates in vertical orientation', () => {
     const gameboard = Gameboard()
-    expect(gameboard.placeShip('A1', 'A3').shipLength).toEqual(2)
+    gameboard.placeShip('A1', 'A3')
+    const arr = gameboard.getShipCoordinatesArr()
+    const expected = ['A1', 'A2', 'A3']
+    expect(arr).toEqual(expected)
   });
   it('returns a ship object given coordinates in horizontal orientation', () => {
     const gameboard = Gameboard()
-    expect(gameboard.placeShip('A1', 'C1').shipLength).toEqual(2)
-  });
-  it('updates array of ship coordinates', () => {
-    const gameboard = Gameboard()
-    const expected = {'ship1': ['A1', 'A2', 'A3']}
-    gameboard.placeShip('A1', 'A3')
-    expect(gameboard.shipCoordinates).toEqual(expected)
+    gameboard.placeShip('A1', 'C1')
+    const arr = gameboard.getShipCoordinatesArr()
+    const expected = ['A1', 'B1', 'C1']
+    expect(arr).toEqual(expected)
   });
 });
-
+/*
 describe('receiveAttack', () => {
   it('sinks a ship when attacks are received for all coordinates of the ship', () => {
     const gameboard = Gameboard()

@@ -32,4 +32,35 @@ const Ship = (shipLength) => {
 
 // A factory function for the gameboard object
 
-export { Ship }
+const Gameboard = () => {
+  const ships = []
+  const shipCoordinatesArr = []
+
+  const getShipCoordinatesArr = () => shipCoordinatesArr
+
+  const placeShip = (start, end) => {
+    const startX = parseInt(start[0], 36) - 9
+    const startY = parseInt(start[1], 10)
+    const endX = parseInt(end[0], 36) - 9
+    const endY = parseInt(end[1], 10)
+
+    const xLength = endX - startX
+    const yLength = endY - startY
+
+    if(xLength === 0) {
+      for(let i = 0; i < yLength + 1; i += 1) {
+        shipCoordinatesArr.push((startX + 9).toString(36).toUpperCase() + (startY + i).toString())
+      }
+    } else {
+      for(let i = 0; i < xLength + 1; i += 1) {
+        shipCoordinatesArr.push((startX + i + 9).toString(36).toUpperCase() + (startY).toString())
+      }
+    }
+    const ship = Ship()
+    ships.push(ship)
+  }
+
+  return { placeShip, getShipCoordinatesArr }
+}
+
+export { Ship, Gameboard }
