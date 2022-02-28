@@ -1,4 +1,4 @@
-import { Ship, Gameboard } from "./app"
+import { Ship, Gameboard, Player } from "./app"
 
 describe('hit', () => {
   const ship = Ship(1)
@@ -92,6 +92,7 @@ describe('fillboard', () => {
     expect(gameboard.ships).not.toBeNull
   })
 })
+*/
 
 describe('attack', () => {
   it('attacks a coordinate on a gameboard', () => {
@@ -103,4 +104,3 @@ describe('attack', () => {
     expect(gameboard.areAllShipsSunk()).toBeTruthy
   })
 })
-*/

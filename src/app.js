@@ -41,6 +41,7 @@ const Gameboard = () => {
   const getShipCoordinatesArr = () => shipCoordinatesObj
 
   // A function that adds ship coordinates to an array and makes a ship object
+
   const placeShip = (start, end) => {
     const startX = parseInt(start[0], 36) - 9
     const startY = parseInt(start[1], 10)
@@ -116,4 +117,21 @@ const Gameboard = () => {
   return { placeShip, getShipCoordinatesArr, receiveAttack, getShips, getMissedAttacksArr, areAllShipsSunk }
 }
 
-export { Ship, Gameboard }
+// A factory function for the player object
+
+const Player = () => {
+  const attack = (board, coordinate) => {
+    board.receiveAttack(coordinate)
+  }
+
+  const compAttack = (board) => {
+    const getRandomNumber = () => Math.floor(Math.random()*10 + 1)
+    const getRandomLetter = () => (getRandomNumber() + 9).toString(36)
+    const coordinate = getRandomLetter.toUpperCase() + getRandomNumber.toString()
+    attack(board, coordinate)
+  }
+
+  return { attack, compAttack }
+}
+
+export { Ship, Gameboard, Player }
