@@ -81,6 +81,115 @@ const Gameboard = () => {
     shipCounter += 1
   }
 
+  const getRandomNumber = () => Math.floor(Math.random()*10 + 1)
+  const getRandomLetter = () => (getRandomNumber() + 9).toString(36)
+  const getRandomCoordinates = () => getRandomLetter().toUpperCase() + getRandomNumber().toString()
+
+  const generateCoordinates = (start, end) => {
+    const xStart = parseInt(start[0], 36) - 9
+    const yStart = parseInt(start[1], 10)
+    const xEnd = parseInt(end[0], 36) - 9
+    const yEnd = parseInt(end[1], 10)
+
+    const xLength = xEnd - xStart
+    const yLength = yEnd - yStart
+
+    const coordinatesArr = []
+
+    if(xLength === 0) {
+      for(let i =0; i < yLength + 1; i += 1) {
+        coordinatesArr.push((xStart + 9).toString(36).toUpperCase() + (yStart + i).toString())
+      }
+    } else if(yLength === 0) {
+      for(let i =0; i < xLength + 1; i += 1) {
+        coordinatesArr.push((xStart + i + 9).toString(36).toUpperCase() + (yStart).toString())
+      }
+    }
+    return coordinatesArr
+  }
+
+  const willShipCollide = (coordinates) => {
+    const randomShipCoordinates = coordinates
+    const shipCoordinatesArr = getShipCoordinatesArr()
+    let shipCollisionBool = false
+    for(let i = 0; i < randomShipCoordinates.length; i += 1) {
+      if(shipCoordinatesArr.includes(randomShipCoordinates[i])) {
+        shipCollisionBool = true
+      }
+    }
+    return shipCollisionBool
+  }
+
+  const getFilteredCoordinates = (start, endArr) => {
+    const valuesToFilter = []
+    for(let i = 0; i < endArr.length; i += 1) {
+      const allCoordinates = generateCoordinates(start, endArr[i])
+      if(willShipCollide(allCoordinates)) {
+        valuesToFilter.push(endArr[i])
+      }
+    }
+
+    const filteredEndArr = []
+
+    for(let i = 0; i < endArr.length; i += 1) {
+      if(!(valuesToFilter.includes(endArr[i]))) {
+        filteredEndArr.push(endArr[i])
+      }
+    }
+
+    return filteredEndArr
+  }
+
+  const getRandomEndCoordinates = (start, shipLength) => {
+
+    const xStart = parseInt(start[0], 36) - 9
+    const yStart = parseInt(start[1], 10)
+
+    const randomEndCoordinates = []
+
+    if(xStart + shipLength < 11) {
+      randomEndCoordinates.push((xStart + shipLength + 9).toString(36).toUpperCase() + (yStart).toString())
+    }
+    if(yStart + shipLength < 11) {
+      randomEndCoordinates.push((xStart + 9).toString(36).toUpperCase() + (yStart + shipLength).toString()) 
+    }
+
+    console.log(start)
+    console.log(shipLength)
+    console.log(randomEndCoordinates)
+
+    return randomEndCoordinates
+    
+  }
+
+  const getRandomIndex = (min, max) => Math.floor(Math.random() * (max - min + 1)) +  min
+
+  const placeShipRandomly = (length) => {
+    let filteredEndArr = []
+    let startCoordinates = ''
+    while(filteredEndArr.length === 0) {
+      const randomStartCoordinates = getRandomCoordinates()
+      const randomEndCoordinates = getRandomEndCoordinates(randomStartCoordinates, length)
+      const filteredEndCoordinates = getFilteredCoordinates(randomStartCoordinates, randomEndCoordinates)
+      startCoordinates = randomStartCoordinates
+      filteredEndArr = filteredEndCoordinates
+    }
+    const index = getRandomIndex(0, filteredEndArr.length - 1)
+    placeShip(startCoordinates, filteredEndArr[index])
+  }
+
+  const fillBoardRandomly = () => {
+    const shipLengthArr = [4,3,2,1]
+    for(let i = 0; i < shipLengthArr.length; i += 1) {
+      let j = i
+      while(j + 1 > 0) {
+        placeShipRandomly(shipLengthArr[i])
+        j -= 1
+      }
+    }
+    console.log(shipCoordinatesObj)
+  }
+
   // A helper function that returns the key given a value
   const getKeyByValue = (obj, value) => Object.keys(obj).find(key => obj[key].includes(value))
 
@@ -121,7 +230,7 @@ const Gameboard = () => {
     return allShipsSunkBool
   }
 
-  return { placeShip, getShipCoordinatesObj, getShipCoordinatesArr, receiveAttack, getShips, getMissedAttacksArr, areAllShipsSunk }
+  return { placeShip, fillBoardRandomly, getShipCoordinatesObj, getShipCoordinatesArr, receiveAttack, getShips, getMissedAttacksArr, areAllShipsSunk }
 }
 
 // A factory function for the player object
@@ -134,7 +243,7 @@ const Player = () => {
   const compAttack = (board) => {
     const getRandomNumber = () => Math.floor(Math.random()*10 + 1)
     const getRandomLetter = () => (getRandomNumber() + 9).toString(36)
-    const coordinate = getRandomLetter.toUpperCase() + getRandomNumber.toString()
+    const coordinate = getRandomLetter().toUpperCase() + getRandomNumber().toString()
     attack(board, coordinate)
   }
 

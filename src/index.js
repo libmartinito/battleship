@@ -24,7 +24,7 @@ const Game = () => {
   const compBoard = Gameboard()
   const player = Player()
   const comp = Player()
-
+/*
   playerBoard.placeShip('A1', 'E1')
   playerBoard.placeShip('A3', 'D3')
   playerBoard.placeShip('F3', 'I3')
@@ -35,19 +35,18 @@ const Game = () => {
   playerBoard.placeShip('D8', 'E8')
   playerBoard.placeShip('G8', 'H8')
   playerBoard.placeShip('A9', 'B9')
-
+*/
+  playerBoard.fillBoardRandomly()
   compBoard.placeShip('A1', 'E1')
 
-  const shipCoordinatesArr = playerBoard.getShipCoordinatesObj()
-  displayShips(shipCoordinatesArr)
+  const shipCoordinatesObj = playerBoard.getShipCoordinatesObj()
+  displayShips(shipCoordinatesObj)
 
   const checkWinner = () => {
     const ships = compBoard.getShips()
     if(playerBoard.areAllShipsSunk()) {
-      console.log(playerBoard.areAllShipsSunk())
       console.log('The computer won.')
     } else if(compBoard.areAllShipsSunk()) {
-      console.log(compBoard.areAllShipsSunk())
       console.log('You won!')
     }
   }
