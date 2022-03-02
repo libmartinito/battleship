@@ -51,9 +51,21 @@ const Gameboard = () => {
 
   const placeShip = (start, end) => {
     const startX = parseInt(start[0], 36) - 9
-    const startY = parseInt(start[1], 10)
+    let startY = 0
     const endX = parseInt(end[0], 36) - 9
-    const endY = parseInt(end[1], 10)
+    let endY = 0
+
+    if(start[2] === undefined) {
+      startY = parseInt(start[1], 10)
+    } else {
+      startY = parseInt(start.substr(start.length - 2), 10)
+    }
+
+    if(end[2] === undefined) {
+      endY = parseInt(end[1], 10)
+    } else {
+      endY = parseInt(end.substr(end.length - 2), 10)
+    }
 
     const xLength = endX - startX
     const yLength = endY - startY
@@ -87,9 +99,21 @@ const Gameboard = () => {
 
   const generateCoordinates = (start, end) => {
     const xStart = parseInt(start[0], 36) - 9
-    const yStart = parseInt(start[1], 10)
+    let yStart = 0
     const xEnd = parseInt(end[0], 36) - 9
-    const yEnd = parseInt(end[1], 10)
+    let yEnd = 0
+
+    if(start[2] === undefined) {
+      yStart = parseInt(start[1], 10)
+    } else {
+      yStart = parseInt(start.substr(start.length - 2), 10)
+    }
+
+    if(end[2] === undefined) {
+      yEnd = parseInt(end[1], 10)
+    } else {
+      yEnd = parseInt(end.substr(end.length - 2), 10)
+    }
 
     const xLength = xEnd - xStart
     const yLength = yEnd - yStart
@@ -143,7 +167,13 @@ const Gameboard = () => {
   const getRandomEndCoordinates = (start, shipLength) => {
 
     const xStart = parseInt(start[0], 36) - 9
-    const yStart = parseInt(start[1], 10)
+    let yStart = 0
+
+    if(start[2] === undefined) {
+      yStart = parseInt(start[1], 10)
+    } else {
+      yStart = parseInt(start.substr(start.length - 2), 10)
+    }
 
     const randomEndCoordinates = []
 
@@ -153,10 +183,6 @@ const Gameboard = () => {
     if(yStart + shipLength < 11) {
       randomEndCoordinates.push((xStart + 9).toString(36).toUpperCase() + (yStart + shipLength).toString()) 
     }
-
-    console.log(start)
-    console.log(shipLength)
-    console.log(randomEndCoordinates)
 
     return randomEndCoordinates
     
@@ -174,7 +200,10 @@ const Gameboard = () => {
       startCoordinates = randomStartCoordinates
       filteredEndArr = filteredEndCoordinates
     }
+    console.log(startCoordinates)
+    console.log(filteredEndArr)
     const index = getRandomIndex(0, filteredEndArr.length - 1)
+    console.log(index)
     placeShip(startCoordinates, filteredEndArr[index])
   }
 
