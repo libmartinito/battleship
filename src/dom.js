@@ -1,5 +1,3 @@
-import { Game } from './app'
-
 const displayHeader = (parent, orientation) => {
 
   for(let i = 0; i < 10; i += 1) {
@@ -29,23 +27,33 @@ const displayGrid = (parent) => {
   }
 }
 
+const getShipOrientation = (coordinates) => {
+  let orientation = ''
+  const xStartOne = coordinates[0][0]
+  const xStartTwo = coordinates[1][0]
+  if(xStartOne === xStartTwo) {
+    orientation = 'ver'
+  }else {
+    orientation = 'hor'
+  }
+  return orientation
+}
+
 const displayShips = (coordinateObj) => {
   const shipCoordinatesObjVal = Object.values(coordinateObj)
   const boxArr = document.querySelectorAll('.player__grid .box')
   boxArr.forEach(box => {
     for(let i = 0; i < shipCoordinatesObjVal.length; i += 1) {
+      const orientation = getShipOrientation(shipCoordinatesObjVal[i])
       for(let j = 0; j < shipCoordinatesObjVal[i].length; j += 1) {
         if(box.dataset.coordinate === shipCoordinatesObjVal[i][j]) {
-          box.style.backgroundColor = 'var(--sky)'
+          box.classList.add('box--ship')
           if(j === 0) {
-            box.style.borderWidth = '2px 1px 2px 2px'
-            box.style.borderStyle = 'solid dotted solid solid'
+            box.classList.add(`box--start-${orientation}`)
           } else if(j === shipCoordinatesObjVal[i].length - 1) {
-            box.style.borderWidth = '2px 2px 2px 1px'
-            box.style.borderStyle = 'solid solid solid dotted'
+            box.classList.add(`box--end-${orientation}`)
           } else {
-            box.style.borderWidth = '2px 1px 2px 1px'
-            box.style.borderStyle = 'solid dotted'
+            box.classList.add(`box--mid-${orientation}`)
           }
         }
       }

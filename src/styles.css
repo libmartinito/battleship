@@ -85,3 +85,37 @@
   align-items: center;
   font-size: 2rem;
 }
+
+.box--ship {
+  background-color: var(--sky);
+}
+
+.box--start-hor {
+  border-width: 2px 1px 2px 2px;
+  border-style: solid dotted solid solid;
+}
+
+.box--end-hor {
+  border-width: 2px 2px 2px 1px;
+  border-style: solid solid solid dotted;
+}
+
+.box--mid-hor {
+  border-width: 2px 1px 2px 1px;
+  border-style: solid dotted;
+}
+
+.box--start-ver {
+  border-width: 2px 2px 1px 2px;
+  border-style: solid solid dotted solid;
+}
+
+.box--end-ver {
+  border-width: 1px 2px 2px 2px;
+  border-style: dotted solid solid solid;
+}
+
+.box--mid-ver {
+  border-width: 1px 2px 1px 2px;
+  border-style: dotted solid;
+}
