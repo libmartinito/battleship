@@ -93,9 +93,13 @@ const Gameboard = () => {
     shipCounter += 1
   }
 
+  // Helper functions for generating a random coordinates
+
   const getRandomNumber = () => Math.floor(Math.random()*10 + 1)
   const getRandomLetter = () => (getRandomNumber() + 9).toString(36)
   const getRandomCoordinates = () => getRandomLetter().toUpperCase() + getRandomNumber().toString()
+
+  // A helper function that returns all the coordinates between a star and end coordinate (inclusive)
 
   const generateCoordinates = (start, end) => {
     const xStart = parseInt(start[0], 36) - 9
@@ -132,6 +136,9 @@ const Gameboard = () => {
     return coordinatesArr
   }
 
+  // A helper function that checks if even one of a series of coordinates will collide
+  // with a ship that is already on the board
+
   const willShipCollide = (coordinates) => {
     const randomShipCoordinates = coordinates
     const shipCoordinatesArr = getShipCoordinatesArr()
@@ -143,6 +150,8 @@ const Gameboard = () => {
     }
     return shipCollisionBool
   }
+
+  // A helper function that returns potential end coordinates with the collisions filtered
 
   const getFilteredCoordinates = (start, endArr) => {
     const valuesToFilter = []
@@ -163,6 +172,8 @@ const Gameboard = () => {
 
     return filteredEndArr
   }
+
+  // A function that returns potential end coordinates
 
   const getRandomEndCoordinates = (start, shipLength) => {
 
@@ -188,11 +199,16 @@ const Gameboard = () => {
     
   }
 
+  // A helper function that returns a random index including the min and max values
+
   const getRandomIndex = (min, max) => Math.floor(Math.random() * (max - min + 1)) +  min
+
+  // A helper function that places a ship randomly on the board
 
   const placeShipRandomly = (length) => {
     let filteredEndArr = []
     let startCoordinates = ''
+
     while(filteredEndArr.length === 0) {
       const randomStartCoordinates = getRandomCoordinates()
       const randomEndCoordinates = getRandomEndCoordinates(randomStartCoordinates, length)
@@ -200,12 +216,13 @@ const Gameboard = () => {
       startCoordinates = randomStartCoordinates
       filteredEndArr = filteredEndCoordinates
     }
-    console.log(startCoordinates)
-    console.log(filteredEndArr)
+  
     const index = getRandomIndex(0, filteredEndArr.length - 1)
-    console.log(index)
+
     placeShip(startCoordinates, filteredEndArr[index])
   }
+
+  // A function that fills a board randomly with ships
 
   const fillBoardRandomly = () => {
     const shipLengthArr = [4,3,2,1]
@@ -216,7 +233,6 @@ const Gameboard = () => {
         j -= 1
       }
     }
-    console.log(shipCoordinatesObj)
   }
 
   // A helper function that returns the key given a value
