@@ -161,3 +161,26 @@
   align-items: center;
   margin-top: 2rem;
 }
+
+@media screen and (max-width: 500px) {
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .player,
+  .computer {
+    width: 360px;
+    height: 360px;
+  }
+
+  .player {
+    margin-top: 8rem;
+  }
+
+  .computer {
+    margin-top: 3rem;
+    margin-bottom: 8rem;
+  }
+}
