@@ -1,5 +1,5 @@
 
-import { displayHeader, displayGrid, displayShips, displayHiddenShip } from './dom';
+import { displayHeader, displayGrid, displayShips, displayHiddenShip, updateHitDisplay } from './dom';
 import './styles.css';
 import { Gameboard, Player } from './app'
 
@@ -46,8 +46,8 @@ const Game = () => {
     const boxArr = document.querySelectorAll('.computer__grid .box')
     boxArr.forEach(box => {
       box.addEventListener('click', (e) => {
-        e.target.textContent = 'X'
         player.attack(compBoard, e.target.dataset.coordinate)
+        updateHitDisplay(compBoard)
         displayHiddenShip(e.target)
         checkWinner()
       })

@@ -294,5 +294,43 @@ const Player = () => {
 
   return { attack, compAttack }
 }
+/*
+const Game = () => {
+  const playerBoard = Gameboard()
+  const compBoard = Gameboard()
+  const player = Player()
+  const comp = Player()
 
+  playerBoard.fillBoardRandomly()
+  compBoard.fillBoardRandomly()
+
+  const playerShips = playerBoard.getShipCoordinatesObj()
+  const compShips = compBoard.getShipCoordinatesObj()
+  displayShips(playerShips, 'player')
+  displayShips(compShips, 'computer')
+
+  const checkWinner = () => {
+    const ships = compBoard.getShips()
+    if(playerBoard.areAllShipsSunk()) {
+      console.log('The computer won.')
+    } else if(compBoard.areAllShipsSunk()) {
+      console.log('You won!')
+    }
+  }
+
+  const addBoxEventListener = () => {
+    const boxArr = document.querySelectorAll('.computer__grid .box')
+    boxArr.forEach(box => {
+      box.addEventListener('click', (e) => {
+        e.target.textContent = 'X'
+        player.attack(compBoard, e.target.dataset.coordinate)
+        displayHiddenShip(e.target)
+        checkWinner()
+      })
+    })
+  }
+
+  addBoxEventListener()
+}
+*/
 export { Ship, Gameboard, Player }

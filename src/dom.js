@@ -79,5 +79,53 @@ const displayHiddenShip = (target) => {
   target.classList.remove('box--hidden')
 }
 
-export{ displayHeader, displayGrid, displayShips, displayHiddenShip }
+const getShipHitIndex = (arr) => {
+  const shipHitIndex = []
+  for(let i = 0; i < arr.length; i += 1) {
+    if(arr[i] === 'hit') {
+      shipHitIndex.push(i)
+    }
+  }
+  return shipHitIndex
+}
+
+const getHitCoordinates = (indexArr, coordinatesArr) => {
+  const hitCoordinatesArr = []
+  for(let i = 0; i < indexArr.length; i += 1) {
+    hitCoordinatesArr.push(coordinatesArr[indexArr[i]])
+  }
+  return hitCoordinatesArr
+}
+
+const updateHitDisplay = (board) => {
+  const ships = board.getShips()
+  const allShipCoordinates = Object.values(board.getShipCoordinatesObj())
+  const hitCoordinatesArr = []
+  const missedAttacks = board.getMissedAttacksArr()
+  for(let i = 0; i < ships.length; i += 1) {
+    const shipHitArr = ships[i].getShipHitArr()
+    const shipHitIndex = getShipHitIndex(shipHitArr)
+    console.log(shipHitIndex)
+    const shipCoordinates = allShipCoordinates[i]
+    console.log(shipCoordinates)
+    const shipHitCoordinates = getHitCoordinates(shipHitIndex, shipCoordinates)
+    hitCoordinatesArr.push(shipHitCoordinates)
+  }
+  const hitCoordinates = [].concat(...hitCoordinatesArr)
+  const boxes = document.querySelectorAll('.computer__grid .box')
+  boxes.forEach(box => {
+    for(let i = 0; i < hitCoordinates.length; i += 1) {
+      if(box.dataset.coordinate === hitCoordinates[i]) {
+        box.textContent = 'X'
+      }
+    }
+    for(let i = 0; i < missedAttacks.length; i += 1) {
+      if(box.dataset.coordinate === missedAttacks[i]) {
+        box.textContent = 'X'
+      }
+    }
+  })
+}
+
+export{ displayHeader, displayGrid, displayShips, displayHiddenShip, updateHitDisplay }
 
