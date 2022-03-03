@@ -39,9 +39,20 @@ const getShipOrientation = (coordinates) => {
   return orientation
 }
 
-const displayShips = (coordinateObj) => {
+const hideCompShip = (elem) => {
+  if(elem.parentElement.classList.contains('computer__grid')) {
+    elem.classList.add('box--hidden')
+  }
+}
+
+const displayShips = (coordinateObj, participant) => {
   const shipCoordinatesObjVal = Object.values(coordinateObj)
-  const boxArr = document.querySelectorAll('.player__grid .box')
+  let boxArr = ''
+  if(participant === 'player') {
+    boxArr = document.querySelectorAll('.player__grid .box')
+  } else {
+    boxArr = document.querySelectorAll('.computer__grid .box')
+  }
   boxArr.forEach(box => {
     for(let i = 0; i < shipCoordinatesObjVal.length; i += 1) {
       const orientation = getShipOrientation(shipCoordinatesObjVal[i])
@@ -50,10 +61,13 @@ const displayShips = (coordinateObj) => {
           box.classList.add('box--ship')
           if(j === 0) {
             box.classList.add(`box--start-${orientation}`)
+            hideCompShip(box)
           } else if(j === shipCoordinatesObjVal[i].length - 1) {
             box.classList.add(`box--end-${orientation}`)
+            hideCompShip(box)
           } else {
             box.classList.add(`box--mid-${orientation}`)
+            hideCompShip(box)
           }
         }
       }
@@ -61,5 +75,9 @@ const displayShips = (coordinateObj) => {
   })
 }
 
-export{ displayHeader, displayGrid, displayShips }
+const displayHiddenShip = (target) => {
+  target.classList.remove('box--hidden')
+}
+
+export{ displayHeader, displayGrid, displayShips, displayHiddenShip }
 

@@ -9,6 +9,7 @@
   --sky: #e0f2fe;
   box-sizing: border-box;
   font: 14px;
+  color: var(--neutral);
 }
 
 .container {
@@ -83,7 +84,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 2rem;
+  font-size: 1.5rem;
 }
 
 .box--ship {
@@ -118,4 +119,9 @@
 .box--mid-ver {
   border-width: 1px 2px 1px 2px;
   border-style: dotted solid;
+}
+
+.box--hidden {
+  background-color: white;
+  border: 1px solid var(--neutral)
 }

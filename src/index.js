@@ -1,5 +1,5 @@
 
-import { displayHeader, displayGrid, displayShips } from './dom';
+import { displayHeader, displayGrid, displayShips, displayHiddenShip } from './dom';
 import './styles.css';
 import { Gameboard, Player } from './app'
 
@@ -24,23 +24,14 @@ const Game = () => {
   const compBoard = Gameboard()
   const player = Player()
   const comp = Player()
-/*
-  playerBoard.placeShip('A1', 'E1')
-  playerBoard.placeShip('A3', 'D3')
-  playerBoard.placeShip('F3', 'I3')
-  playerBoard.placeShip('A5', 'C5')
-  playerBoard.placeShip('E5', 'G5')
-  playerBoard.placeShip('A6', 'C6')
-  playerBoard.placeShip('A8', 'B8')
-  playerBoard.placeShip('D8', 'E8')
-  playerBoard.placeShip('G8', 'H8')
-  playerBoard.placeShip('A9', 'B9')
-*/
-  playerBoard.fillBoardRandomly()
-  compBoard.placeShip('A1', 'E1')
 
-  const shipCoordinatesObj = playerBoard.getShipCoordinatesObj()
-  displayShips(shipCoordinatesObj)
+  playerBoard.fillBoardRandomly()
+  compBoard.fillBoardRandomly()
+
+  const playerShips = playerBoard.getShipCoordinatesObj()
+  const compShips = compBoard.getShipCoordinatesObj()
+  displayShips(playerShips, 'player')
+  displayShips(compShips, 'computer')
 
   const checkWinner = () => {
     const ships = compBoard.getShips()
@@ -57,6 +48,7 @@ const Game = () => {
       box.addEventListener('click', (e) => {
         e.target.textContent = 'X'
         player.attack(compBoard, e.target.dataset.coordinate)
+        displayHiddenShip(e.target)
         checkWinner()
       })
     })
