@@ -1,7 +1,7 @@
 
 import { displayHeader, displayGrid, displayShips, displayHiddenShip, updateHitDisplay } from './dom';
 import './styles.css';
-import { Gameboard, Player } from './app'
+import { Game } from './app'
 
 const playerColHeader = document.querySelector('.player__col-header');
 const playerRowHeader = document.querySelector('.player__row-header');
@@ -19,42 +19,23 @@ displayHeader(compColHeader, 'col');
 displayHeader(compRowHeader, 'row');
 displayGrid(compGrid);
 
-const Game = () => {
-  const playerBoard = Gameboard()
-  const compBoard = Gameboard()
-  const player = Player()
-  const comp = Player()
+const game = Game()
 
-  playerBoard.fillBoardRandomly()
-  compBoard.fillBoardRandomly()
+const playerShips = game.playerBoard.getShipCoordinatesObj()
+const compShips = game.compBoard.getShipCoordinatesObj()
 
-  const playerShips = playerBoard.getShipCoordinatesObj()
-  const compShips = compBoard.getShipCoordinatesObj()
-  displayShips(playerShips, 'player')
-  displayShips(compShips, 'computer')
+displayShips(playerShips, 'player')
+displayShips(compShips, 'computer')
 
-  const checkWinner = () => {
-    const ships = compBoard.getShips()
-    if(playerBoard.areAllShipsSunk()) {
-      console.log('The computer won.')
-    } else if(compBoard.areAllShipsSunk()) {
-      console.log('You won!')
-    }
-  }
-
-  const addBoxEventListener = () => {
-    const boxArr = document.querySelectorAll('.computer__grid .box')
-    boxArr.forEach(box => {
-      box.addEventListener('click', (e) => {
-        player.attack(compBoard, e.target.dataset.coordinate)
-        updateHitDisplay(compBoard)
-        displayHiddenShip(e.target)
-        checkWinner()
-      })
-    })
-  }
-
-  addBoxEventListener()
-}
-
-Game()
+const computerBoxes = document.querySelectorAll('.computer__grid .box')
+computerBoxes.forEach(box => {
+  box.addEventListener('click', (e) => {
+    game.player.attack(game.compBoard, e.target.dataset.coordinate)
+    updateHitDisplay(game.compBoard, 'computer')
+    displayHiddenShip(e.target)
+    game.checkWinner()
+    game.comp.compAttack(game.playerBoard)
+    updateHitDisplay(game.playerBoard, 'player')
+    game.checkWinner()
+  })
+})

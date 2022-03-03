@@ -117,7 +117,7 @@ const getHitCoordinates = (indexArr, coordinatesArr) => {
 
 // A function that displays a mark on the screen when hit
 
-const updateHitDisplay = (board) => {
+const updateHitDisplay = (board, participant) => {
   const ships = board.getShips()
   const allShipCoordinates = Object.values(board.getShipCoordinatesObj())
   const hitCoordinatesArr = []
@@ -132,7 +132,12 @@ const updateHitDisplay = (board) => {
     hitCoordinatesArr.push(shipHitCoordinates)
   }
   const hitCoordinates = [].concat(...hitCoordinatesArr)
-  const boxes = document.querySelectorAll('.computer__grid .box')
+  let boxes = ''
+  if(participant === 'player') {
+    boxes = document.querySelectorAll('.player__grid .box')
+  } else {
+    boxes = document.querySelectorAll('.computer__grid .box')
+  }
   boxes.forEach(box => {
     for(let i = 0; i < hitCoordinates.length; i += 1) {
       if(box.dataset.coordinate === hitCoordinates[i]) {
