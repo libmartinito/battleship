@@ -1,3 +1,4 @@
+import { displayModal } from './dom'
 
 // A factory function for the ship object
 
@@ -306,9 +307,9 @@ const Game = () => {
 
   const checkWinner = () => {
     if(playerBoard.areAllShipsSunk()) {
-      prompt('The computer won.')
+      displayModal('computer')
     } else if(compBoard.areAllShipsSunk()) {
-      prompt('You won!')
+      displayModal('player')
     }
   }
 

@@ -6,6 +6,7 @@
 
 :root {
   --neutral: #525252;
+  --neutral-shadow: rgba(82,82,82,0.5);
   --sky: #e0f2fe;
   box-sizing: border-box;
   font: 14px;
@@ -124,4 +125,39 @@
 .box--hidden {
   background-color: white;
   border: 1px solid var(--neutral)
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: var(--neutral-shadow)
+}
+
+.modal__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 10% auto;
+  width: 360px;
+  height: 280px;
+  background-color: var(--sky);
+  box-shadow: 0.3rem 0.3rem 0.8rem 0.5rem var(--neutral-shadow);
+}
+
+.modal__header {
+  font-size: 2rem;
+}
+
+.modal__body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
 }

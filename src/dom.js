@@ -152,5 +152,40 @@ const updateHitDisplay = (board, participant) => {
   })
 }
 
-export{ displayHeader, displayGrid, displayShips, displayHiddenShip, updateHitDisplay }
+// A function for displaying the modal 
+
+const displayModal = (str) => {
+  const winner = str
+  const modal = document.querySelector('.modal')
+  const modalHeader = document.querySelector('.modal__header')
+  const modalBody = document.querySelector('.modal__body')
+  if(modalHeader.textContent === '') {
+    if(winner === 'player') {
+      modalHeader.textContent = 'Congratulations!'
+      const lineOne = document.createElement('p')
+      lineOne.textContent = 'You won the game, champ!'
+      const lineTwo = document.createElement('p')
+      lineTwo.textContent = 'Time to look for bigger'
+      const lineThree = document.createElement('p')
+      lineThree.textContent = 'dragons to slay.'
+      modalBody.appendChild(lineOne)
+      modalBody.appendChild(lineTwo)
+      modalBody.appendChild(lineThree)
+    } else {
+      modalHeader.textContent = 'Tough luck.'
+      const lineOne = document.createElement('p')
+      lineOne.textContent = 'You lost the game.'
+      const lineTwo = document.createElement('p')
+      lineTwo.textContent = 'Refresh for another game or not.'
+      const lineThree = document.createElement('p')
+      lineThree.textContent = 'You are the master of your fate.'
+      modalBody.appendChild(lineOne)
+      modalBody.appendChild(lineTwo)
+      modalBody.appendChild(lineThree)
+    }
+  }
+  modal.style.display = 'block'
+}
+
+export{ displayHeader, displayGrid, displayShips, displayHiddenShip, updateHitDisplay, displayModal }
 
