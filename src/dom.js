@@ -1,3 +1,5 @@
+// A function for displaying the column headers of the grid
+
 const displayHeader = (parent, orientation) => {
 
   for(let i = 0; i < 10; i += 1) {
@@ -14,6 +16,8 @@ const displayHeader = (parent, orientation) => {
   }
 }
 
+// A function for displaying the row headers of the grid
+
 const displayGrid = (parent) => {
   for(let i = 0; i < 10; i += 1) {
     for(let j = 0; j < 10; j += 1) {
@@ -27,6 +31,8 @@ const displayGrid = (parent) => {
   }
 }
 
+// A helper function that determines the orientation of the ship
+
 const getShipOrientation = (coordinates) => {
   let orientation = ''
   const xStartOne = coordinates[0][0]
@@ -39,11 +45,16 @@ const getShipOrientation = (coordinates) => {
   return orientation
 }
 
+// A helper function that hides the ships of the computer board
+
 const hideCompShip = (elem) => {
   if(elem.parentElement.classList.contains('computer__grid')) {
     elem.classList.add('box--hidden')
   }
 }
+
+// A function that adds css to specific cells to represent the ship
+// as well as hides the ships on the computer board
 
 const displayShips = (coordinateObj, participant) => {
   const shipCoordinatesObjVal = Object.values(coordinateObj)
@@ -75,9 +86,13 @@ const displayShips = (coordinateObj, participant) => {
   })
 }
 
+// A function that displays hidden ship cells when attacked
+
 const displayHiddenShip = (target) => {
   target.classList.remove('box--hidden')
 }
+
+// A helper function that gets the location of where a ship has been hit
 
 const getShipHitIndex = (arr) => {
   const shipHitIndex = []
@@ -89,6 +104,9 @@ const getShipHitIndex = (arr) => {
   return shipHitIndex
 }
 
+// A helper function that gets the coordinates of the location where a ship
+// has been hit
+
 const getHitCoordinates = (indexArr, coordinatesArr) => {
   const hitCoordinatesArr = []
   for(let i = 0; i < indexArr.length; i += 1) {
@@ -96,6 +114,8 @@ const getHitCoordinates = (indexArr, coordinatesArr) => {
   }
   return hitCoordinatesArr
 }
+
+// A function that displays a mark on the screen when hit
 
 const updateHitDisplay = (board) => {
   const ships = board.getShips()
